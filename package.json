@@ -1,0 +1,22 @@
+{
+  "name": "copycat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ayhamthemayhem/copycat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayhamthemayhem/copycat/issues"
+  },
+  "homepage": "https://github.com/ayhamthemayhem/copycat#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.1"
+  }
+}
