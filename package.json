@@ -16,7 +16,8 @@
     "url": "https://github.com/ayhamthemayhem/copycat/issues"
   },
   "homepage": "https://github.com/ayhamthemayhem/copycat#readme",
-  "devDependencies": {
-    "@faker-js/faker": "^8.0.1"
+  "dependencies": {
+    "@faker-js/faker": "^8.0.1",
+    "args": "^5.0.3"
   }
 }

@@ -1,4 +1,6 @@
 const { faker } = require('@faker-js/faker');
+const args = require('args');
+const fs = require('fs');
 
 const randomizeValue = (value) => {
   if (typeof value === "string") {
@@ -32,9 +34,33 @@ const createRandomCopies = (json, numberOfCopies) => {
   return copies;
 };
 
-// Usage:
-const inputJson = { name: "John", age: 30, likesIceCream: true, favoriteColors: ["red", "blue"] };
 
-const copies = createRandomCopies(inputJson, 5);
+args
+  .option(['i', 'input'], 'The input JSON file')
+  .option(['o', 'output'], 'The output JSON file')
+  .option(['c', 'copies'], 'The number of copies to create', 1);
 
-console.log(copies);
+const flags = args.parse(process.argv);
+
+if (!flags.input || !flags.output) {
+  console.error('Usage: node script.js -i <input.json> -o <output.json> [-c <numberOfCopies>]');
+  process.exit(1);
+}
+
+fs.readFile(flags.input, 'utf-8', (err, data) => {
+  if (err) {
+    console.error('Error reading input file:', err);
+    process.exit(1);
+  }
+
+  const inputJson = JSON.parse(data);
+  const copies = createRandomCopies(inputJson, flags.copies);
+
+  fs.writeFile(flags.output, JSON.stringify(copies, null, 2), (err) => {
+    if (err) {
+      console.error('Error writing output file:', err);
+      process.exit(1);
+    }
+    console.log(`Successfully generated ${flags.copies} copies to ${flags.output}`);
+  });
+});
